@@ -1,24 +1,41 @@
-import { sectors } from "@/data/sectors";
-import { Link } from "umi";
+import { Link } from 'umi';
+import { SECTORS } from '@/data/expo';
 
 export default function ExpoCity() {
   return (
-    <div style={{ padding: 24 }}>
-      <h1>TradePi B2B – Expo City</h1>
-      <p>Türkiye üreticileri için dijital fuar alanı</p>
+    <div className="container">
+      <div className="topbar">
+        <div className="brand">
+          <b>TradePi B2B — Expo City</b>
+          <span>Türkiye üreticilerini dünyaya tanıtma vitrini</span>
+        </div>
+        <Link className="btn btnPrimary" to="/rfq">RFQ Oluştur</Link>
+      </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px,1fr))", gap: 16 }}>
-        {sectors.map((s) => (
-          <Link key={s.id} to={`/expo/${s.id}`}>
-            <div style={{
-              border: "1px solid #ddd",
-              borderRadius: 12,
-              padding: 20,
-              background: "#fafafa",
-              cursor: "pointer"
-            }}>
-              <h3>{s.name}</h3>
-              <p>Showroomları keşfet</p>
+      <div className="grid">
+        <div className="card span12">
+          <div className="h1">Expo City</div>
+          <p className="p">
+            Sektör binasını seç → kategori mağazalarını gör → paket/yerleşim detayına gir.
+          </p>
+          <div className="kpi">
+            <span>✅ Sektör binaları</span>
+            <span>✅ Kategori mağazaları</span>
+            <span>✅ Üyelik paketleri</span>
+            <span>✅ RFQ</span>
+          </div>
+        </div>
+
+        {SECTORS.map((s) => (
+          <Link key={s.slug} to={`/expo/${s.slug}`} className="card span6">
+            <div className="tile">
+              <span className="badge">SEKTÖR BİNASI</span>
+              <div className="tileTitle">{s.title}</div>
+              <p className="tileDesc">{s.subtitle}</p>
+              <div className="kpi">
+                <span>{s.categories.length} kategori</span>
+                <span>Showroom + Store</span>
+              </div>
             </div>
           </Link>
         ))}
