@@ -1,47 +1,91 @@
-export const SECTORS = [
-  {
-    id: 'tekstil',
-    title: 'Tekstil & Moda',
-    color: 'red',
-    // Şehir ekranında bina hotspot koordinatları (responsive için yüzde)
-    hotspot: { x: 12, y: 55, w: 18, h: 26 },
-    categories: [
-      { id: 'kumas', title: 'Kumaş', stores: 24 },
-      { id: 'hazirgiyim', title: 'Hazır Giyim', stores: 18 },
-      { id: 'aksesuar', title: 'Aksesuar', stores: 12 },
-    ],
-  },
-  {
-    id: 'gida',
-    title: 'Gıda & Tarım',
-    color: 'green',
-    hotspot: { x: 38, y: 48, w: 20, h: 30 },
-    categories: [
-      { id: 'kuruyemis', title: 'Kuruyemiş', stores: 15 },
-      { id: 'bakliyat', title: 'Bakliyat', stores: 20 },
-      { id: 'zeytin', title: 'Zeytin & Yağ', stores: 11 },
-    ],
-  },
-  // ... tüm sektörler böyle
-];
+export type PackageTier = 'FREE' | 'PRO' | 'EXPO';
 
-export const MEMBERSHIP_PACKAGES = [
+export type Category = {
+  slug: string;
+  title: string;
+  short: string;
+  packageTiers: PackageTier[];
+};
+
+export type Sector = {
+  slug: string;
+  title: string;
+  subtitle: string;
+  categories: Category[];
+};
+
+export const PACKAGE_INFO: Record<PackageTier, { title: string; priceHint: string; bullets: string[] }> = {
+  FREE: {
+    title: 'Starter (Free)',
+    priceHint: 'Tanıtım amaçlı',
+    bullets: [
+      '1 showroom kartı',
+      'Temel firma profili',
+      'RFQ alma / gönderme',
+      'Sınırlı görünürlük',
+    ],
+  },
+  PRO: {
+    title: 'Pro Showroom',
+    priceHint: 'Aylık / Yıllık',
+    bullets: [
+      'Daha yüksek görünürlük',
+      'Ürün + belge alanları geniş',
+      'Kategori vitrini önceliği',
+      'RFQ yönetimi (panel)',
+    ],
+  },
+  EXPO: {
+    title: 'Expo City Store',
+    priceHint: 'Premium',
+    bullets: [
+      'Sektör binasında “mağaza” slotu',
+      'Öne çıkan vitrin + marka alanı',
+      'Ülke hedefleme + vitrin etiketleri',
+      'Öncelikli destek / doğrulama',
+    ],
+  },
+};
+
+export const SECTORS: Sector[] = [
   {
-    id: 'basic',
-    title: 'BASIC SHOWROOM',
-    price: 'Ücretsiz / Davetli',
-    features: ['Firma profili', '1 showroom sayfası', 'Temel ürün vitrin'],
+    slug: 'tekstil-moda',
+    title: 'Tekstil & Moda',
+    subtitle: 'Üretici markalar ve tedarikçiler',
+    categories: [
+      { slug: 'hazir-giyim', title: 'Hazır Giyim', short: 'Toptan/üretim', packageTiers: ['FREE','PRO','EXPO'] },
+      { slug: 'kumas', title: 'Kumaş', short: 'Dokuma/örme', packageTiers: ['PRO','EXPO'] },
+      { slug: 'ayakkabi', title: 'Ayakkabı', short: 'OEM/ODM', packageTiers: ['FREE','PRO','EXPO'] },
+    ],
   },
   {
-    id: 'pro',
-    title: 'PRO EXPO BOOTH',
-    price: 'Aylık',
-    features: ['Sektör içi öne çıkma', 'RFQ paneli', 'Belge doğrulama rozeti'],
+    slug: 'gida-tarim',
+    title: 'Gıda & Tarım',
+    subtitle: 'İhracat odaklı üretim',
+    categories: [
+      { slug: 'kuruyemis', title: 'Kuruyemiş', short: 'Toplu satış', packageTiers: ['FREE','PRO','EXPO'] },
+      { slug: 'bakliyat', title: 'Bakliyat', short: 'Konteyner', packageTiers: ['PRO','EXPO'] },
+      { slug: 'zeytin-zeytinyagi', title: 'Zeytin & Zeytinyağı', short: 'Markalı/Private Label', packageTiers: ['FREE','PRO','EXPO'] },
+    ],
   },
   {
-    id: 'enterprise',
-    title: 'ENTERPRISE CITY',
-    price: 'Teklif',
-    features: ['Özel bina/kat', 'API entegrasyon', 'Öncelikli destek'],
+    slug: 'makine-endustri',
+    title: 'Makine & Endüstri',
+    subtitle: 'İmalat / otomasyon',
+    categories: [
+      { slug: 'cnc', title: 'CNC & Tezgah', short: 'Yedek parça', packageTiers: ['PRO','EXPO'] },
+      { slug: 'otomasyon', title: 'Otomasyon', short: 'Hat/robotik', packageTiers: ['PRO','EXPO'] },
+      { slug: 'yedek-parca', title: 'Yedek Parça', short: 'B2B tedarik', packageTiers: ['FREE','PRO','EXPO'] },
+    ],
+  },
+  {
+    slug: 'elektronik-teknoloji',
+    title: 'Elektronik & Teknoloji',
+    subtitle: 'Bileşenler / üretim',
+    categories: [
+      { slug: 'led-aydinlatma', title: 'LED & Aydınlatma', short: 'Tedarik', packageTiers: ['FREE','PRO','EXPO'] },
+      { slug: 'pcb', title: 'PCB / Kart Üretimi', short: 'OEM', packageTiers: ['PRO','EXPO'] },
+      { slug: 'aksesuar', title: 'Aksesuar', short: 'B2B ürünler', packageTiers: ['FREE','PRO','EXPO'] },
+    ],
   },
 ];
