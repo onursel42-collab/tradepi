@@ -1,14 +1,15 @@
 import { defineConfig } from 'umi';
 
 export default defineConfig({
-  title: 'TradePi B2B Showroom',
+  title: 'TradePi B2B Expo City',
+
   npmClient: 'npm',
-  history: { type: 'browser' },
+
+  history: {
+    type: 'hash', // 🔥 EN KRİTİK SATIR
+  },
+
   routes: [
-    { path: '/', component: '@/pages/index' },
-    { path: '/expo', component: '@/pages/expo/index' },
-    { path: '/expo/:sector', component: '@/pages/expo/[sector]' },
-    { path: '/expo/:sector/:category', component: '@/pages/expo/[sector]/[category]' },
-    { path: '/rfq', component: '@/pages/rfq' },
+    { path: '/', redirect: '/expo' },
   ],
 });
