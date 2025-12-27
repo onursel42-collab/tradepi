@@ -1,19 +1,14 @@
 {
-  "name": "tradepi-expo",
+  "name": "tradepi-expo-city",
   "private": true,
   "scripts": {
     "dev": "umi dev",
     "build": "umi build",
-    "preview": "npx serve dist"
+    "preview": "umi preview"
   },
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "umi": "^4.3.0"
-  },
-  "devDependencies": {
-    "@types/react": "^18.2.0",
-    "@types/react-dom": "^18.2.0",
-    "typescript": "^5.3.3"
   }
 }
